@@ -3,6 +3,7 @@ import time
 import cv2
 from my_dct import *
 from fft import *
+from dct_GUI import *
 
 
 def test_dct():
