@@ -1,21 +1,68 @@
 # C:\Users\ricca\Desktop\artificial.bmp
+# file picker
+from tkinter import messagebox
 from tkinter import *
 import cv2
 from fft import *
+from scipy.misc import imsave
+
+
+def show_message():
+    messagebox.showinfo("Error", "\u03B2 should be from 0 to N+M-2")
+
+
+def fix_values(ff):
+    cols = ff.shape[0]
+    rows = ff.shape[1]
+    for i in range(rows):
+        for j in range(cols):
+            if ff[i,j] < 0:
+                ff[i,j]=0       # setto a 0 i valori negativi
+            elif ff[i,j] > 255:
+                ff[i,j] = 255   # setto a 255 i valori maggiori di 255
+            else:
+                ff[i,j] = int(round(ff[i,j]))
+    return ff
+
+
+# moltiplica per il coeffciente beta le frequenze c(k,l) con k+l>=d
+def beta_mult(d, beta, c):
+    cols = c.shape[0]
+    rows = c.shape[1]
+    for i in range(rows):
+        for j in range(cols):
+            if i+j >= d:
+                c[i, j] *= beta
+
+    ff = fft_idct_2d(c)
+    return ff
 
 
 def callback():
     img_path = Path_entry.get()
-    D = int(D_entry.get())                  # TODO controlli valore
+    d = int(D_entry.get())
+    beta = int(beta_entry.get())
     img = cv2.imread(img_path, 0)
-    matrix = np.array(img, dtype=float)     # array f
-    cols = matrix.shape[0]
-    rows = matrix.shape[1]
-    fft_result = fft_dct_2d(matrix)         # array c
-    print('You clicked the button!')
-    print(img_path)
-    print(D)
-    print(matrix)
+    f = np.array(img, dtype='float64')
+    cols = f.shape[0]
+    rows = f.shape[1]
+    if d < 0 or d > (rows + cols - 2):
+        show_message()
+    c = fft_dct_2d(f)
+    ff = beta_mult(d, beta, c)
+    ff = fix_values(ff)
+
+    imsave('prova', ff)
+
+
+
+
+
+
+    # print('You clicked the button!')
+    # print(img_path)
+    # print(d)
+    # print(matrix)
 
 
 top = Tk()
@@ -47,6 +94,7 @@ MyButton1.grid(row=2, column=4)
 
 top.grid_columnconfigure(4, minsize=200)
 top.grid_rowconfigure(4, minsize=50)
+
 
 
 
