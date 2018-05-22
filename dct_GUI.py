@@ -1,17 +1,18 @@
 # C:\Users\ricca\Desktop\artificial.bmp
-# TODO file picker
-
-from tkinter import messagebox
+# TODO show images
+from tkinter import messagebox, filedialog
 from tkinter import *
 import cv2
 from fft import *
 from scipy.misc import imsave
+import os
 
 
 def show_message():
     messagebox.showinfo("Error", "\u03B2 should be from 0 to N+M-2")
 
 
+# setta i valori come richiesto
 def fix_values(ff):
     rows = ff.shape[0]
     cols = ff.shape[1]
@@ -39,6 +40,7 @@ def beta_mult(d, beta, c):
     return ff
 
 
+# metodo lanciato quando si preme il bottone 'Start'
 def callback():
     img_path = Path_entry.get()
     d = int(D_entry.get())
@@ -53,17 +55,12 @@ def callback():
     ff = beta_mult(d, beta, c)
     ff = fix_values(ff)
 
-    imsave('prova.jpg', ff)
+    imsave('final.jpg', ff)
 
 
-
-
-
-
-    # print('You clicked the button!')
-    # print(img_path)
-    # print(d)
-    # print(matrix)
+def browse():
+    filename = filedialog.askopenfilename(initialdir=os.getcwd(), title="Select BMP File", filetypes=[("BMP Files", "*.bmp")])
+    Path_entry.insert(END, filename)
 
 
 top = Tk()
@@ -90,11 +87,22 @@ beta_label.grid(row=3, column=0)
 beta_entry = Entry(top, bd=5)
 beta_entry.grid(row=3, column=1, sticky='we')
 
-MyButton1 = Button(top, text="Submit", width=20, height=3, command=callback)
-MyButton1.grid(row=2, column=4)
+# START BUTTON
+Start_button = Button(top, text="Start", width=20, height=3, command=callback)
+Start_button.grid(row=5, column=1)
+
+# BROWSE BUTTON
+Browse_button = Button(top, text="Browse", width=20, command=browse)
+Browse_button.grid(row=1, column=4)
+
+
+top.title("DCT")
+
+
 
 top.grid_columnconfigure(4, minsize=200)
-top.grid_rowconfigure(4, minsize=50)
+top.grid_rowconfigure(5, minsize=50)
+
 
 
 
