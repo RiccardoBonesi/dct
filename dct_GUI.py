@@ -1,5 +1,6 @@
 # C:\Users\ricca\Desktop\artificial.bmp
-# file picker
+# TODO file picker
+
 from tkinter import messagebox
 from tkinter import *
 import cv2
@@ -12,8 +13,8 @@ def show_message():
 
 
 def fix_values(ff):
-    cols = ff.shape[0]
-    rows = ff.shape[1]
+    rows = ff.shape[0]
+    cols = ff.shape[1]
     for i in range(rows):
         for j in range(cols):
             if ff[i,j] < 0:
@@ -27,8 +28,8 @@ def fix_values(ff):
 
 # moltiplica per il coeffciente beta le frequenze c(k,l) con k+l>=d
 def beta_mult(d, beta, c):
-    cols = c.shape[0]
-    rows = c.shape[1]
+    rows = c.shape[0]
+    cols = c.shape[1]
     for i in range(rows):
         for j in range(cols):
             if i+j >= d:
@@ -52,7 +53,7 @@ def callback():
     ff = beta_mult(d, beta, c)
     ff = fix_values(ff)
 
-    imsave('prova', ff)
+    imsave('prova.jpg', ff)
 
 
 

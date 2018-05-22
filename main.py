@@ -3,7 +3,6 @@ import time
 import cv2
 from my_dct import *
 from fft import *
-# from dct_GUI import *
 
 
 def test_dct():
@@ -27,6 +26,7 @@ def test_dct():
 
 
 if __name__ == "__main__":
+
     # load image
     # img = Image.open("big_tree.bmp")
     img = cv2.imread('artificial.bmp', 0)
