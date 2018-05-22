@@ -18,6 +18,7 @@ def fft_dct_2d(matrix):
     return second_dct.transpose()
 
 
+# FFT inversa
 def fft_idct_2d(matrix):
     first_dct = np.apply_along_axis(fftidct_wrapper, axis=1, arr=matrix)
     trasposed_matrix = first_dct.transpose()

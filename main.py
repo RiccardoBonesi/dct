@@ -3,7 +3,7 @@ import time
 import cv2
 from my_dct import *
 from fft import *
-from dct_GUI import *
+# from dct_GUI import *
 
 
 def test_dct():
@@ -34,7 +34,12 @@ if __name__ == "__main__":
     # test matrix prof
     # test_dct()
 
-    matrix = np.array(img)
+    # float is faster than int
+    matrix = np.array(img, dtype=float)
+
+    print(matrix)
+
+    print('Image loaded. Starting...')
 
     start = time.time()
     my_result = my_dct_2d(matrix)
