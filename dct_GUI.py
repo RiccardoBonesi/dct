@@ -5,11 +5,12 @@ from tkinter import *
 import cv2
 from fft import *
 from scipy.misc import imsave
+import matplotlib.pyplot as plt
 import os
 
 
 def show_message():
-    messagebox.showinfo("Error", "\u03B2 should be from 0 to N+M-2")
+    messagebox.showinfo("Error", "Value 'd' should be from 0 to N+M-2")
 
 
 # setta i valori come richiesto
@@ -40,6 +41,7 @@ def beta_mult(d, beta, c):
     return ff
 
 
+
 # metodo lanciato quando si preme il bottone 'Start'
 def callback():
     img_path = Path_entry.get()
@@ -51,11 +53,28 @@ def callback():
     rows = f.shape[1]
     if d < 0 or d > (rows + cols - 2):
         show_message()
-    c = fft_dct_2d(f)
-    ff = beta_mult(d, beta, c)
-    ff = fix_values(ff)
+    else:
+        c = fft_dct_2d(f)
+        ff = beta_mult(d, beta, c)
+        ff = fix_values(ff)
+        imsave('final.jpg', ff)
 
-    imsave('final.jpg', ff)
+        plt.figure(1)
+        plt.subplot(121)
+        plt.imshow(img, cmap='gray', vmin=0, vmax=255)
+
+        final = cv2.imread('final.jpg', 0)
+        plt.subplot(122)
+        plt.imshow(final, cmap='gray', vmin=0, vmax=255)
+
+        plt.show()
+
+
+
+
+
+
+
 
 
 def browse():
