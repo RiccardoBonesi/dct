@@ -1,5 +1,3 @@
-# C:\Users\ricca\Desktop\artificial.bmp
-# TODO show images
 from tkinter import messagebox, filedialog
 from tkinter import *
 import cv2
@@ -41,7 +39,6 @@ def beta_mult(d, beta, c):
     return ff
 
 
-
 # metodo lanciato quando si preme il bottone 'Start'
 def callback():
     img_path = Path_entry.get()
@@ -70,63 +67,54 @@ def callback():
         plt.show()
 
 
-
-
-
-
-
-
-
 def browse():
     filename = filedialog.askopenfilename(initialdir=os.getcwd(), title="Select BMP File", filetypes=[("BMP Files", "*.bmp")])
     Path_entry.insert(END, filename)
 
 
-top = Tk()
+root = Tk()
 
-label_transparent = Label(top, text='')
+label_transparent = Label(root, text='')
 label_transparent.grid(row=0, column=0)
 
 # PATH
-Path_label = Label(top, text="Image Path: ")
+Path_label = Label(root, text="Image Path: ")
 Path_label.grid(row=1, column=0)
-Path_entry = Entry(top, bd=5, width=50)
+Path_entry = Entry(root, bd=5, width=50)
 Path_entry.grid(row=1, column=1)
 
 # D VALUE
-D_label = Label(top, text="Value d: ")
+D_label = Label(root, text="Value d: ")
 D_label.grid(row=2, column=0)
-D_entry = Entry(top, bd=5)
+D_entry = Entry(root, bd=5)
 D_entry.grid(row=2, column=1, sticky='we')
 
 
 # B VALUE
-beta_label = Label(top, text="Value \u03B2: ")
+beta_label = Label(root, text="Value \u03B2: ")
 beta_label.grid(row=3, column=0)
-beta_entry = Entry(top, bd=5)
+beta_entry = Entry(root, bd=5)
 beta_entry.grid(row=3, column=1, sticky='we')
 
 # START BUTTON
-Start_button = Button(top, text="Start", width=20, height=3, command=callback)
+Start_button = Button(root, text="Start", width=20, height=3, command=callback)
 Start_button.grid(row=5, column=1)
 
 # BROWSE BUTTON
-Browse_button = Button(top, text="Browse", width=20, command=browse)
+Browse_button = Button(root, text="Browse", width=20, command=browse)
 Browse_button.grid(row=1, column=4)
 
 
-top.title("DCT")
+root.title("DCT")
+
+root.grid_columnconfigure(4, minsize=200)
+root.grid_rowconfigure(5, minsize=50)
 
 
-
-top.grid_columnconfigure(4, minsize=200)
-top.grid_rowconfigure(5, minsize=50)
+# root.configure(background='pink')
 
 
-
-
-
-top.mainloop()
+root.mainloop()
 
 
 

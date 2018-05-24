@@ -1,8 +1,40 @@
-# from PIL import Image
 import time
 import cv2
 from my_dct import *
 from fft import *
+
+
+def estimate_time(matrix_list):
+    for m in matrix_list:
+        start = time.time()
+        my_dct_2d(m)
+        end = time.time()
+        my_elapsed = round(end - start, 4)
+        start = time.time()
+        fft_dct_2d(m)
+        end = time.time()
+        fft_elapsed = round(end - start, 4)
+
+        print("MyDCT elapsed: {} sec - FFT_DCT elapsed: {} sec".format(my_elapsed, fft_elapsed))
+
+
+def test_square_matrix():
+    matrix_list = [np.random.random((50, 50)),
+                   np.random.random((100, 100)),
+                   np.random.random((150, 150)),
+                   np.random.random((200, 200)),
+                   np.random.random((250, 250)),
+                   np.random.random((300, 300)),
+                   np.random.random((350, 350)),
+                   np.random.random((400, 400)),
+                   np.random.random((450, 450)),
+                   np.random.random((500, 500)),
+                   np.random.random((550, 550)),
+                   np.random.random((600, 600)),
+                   np.random.random((650, 650)),
+                   np.random.random((700, 700))]
+
+    estimate_time(matrix_list)
 
 
 def test_dct():
@@ -27,35 +59,33 @@ def test_dct():
 
 if __name__ == "__main__":
 
-    # load image
-    # img = Image.open("big_tree.bmp")
+    test_square_matrix()
+
+    test_dct()
+
     img = cv2.imread('artificial.bmp', 0)
 
-    # test matrix prof
-    # test_dct()
-
-    # float is faster than int
-    matrix = np.array(img, dtype=float)
-
-    print(matrix)
+    matrix = np.array(img, dtype=float)     # float is faster than int
+    # print(matrix)
 
     print('Image loaded. Starting...')
 
-    start = time.time()
-    my_result = my_dct_2d(matrix)
-    end = time.time()
-    my_elapsed = round(end - start, 4)
-    start = time.time()
-    fft_result = fft_dct_2d(matrix)
-    end = time.time()
-    fft_elapsed = round(end - start, 4)
+    estimate_time(matrix)       # compare my_dct and fft time for the image (matrix)
 
-    similar_result = np.allclose(my_result, fft_result)
-    print("MyDCT elapsed: {} sec - FFT_DCT elapsed: {} sec - Results are similar: {}"
-          .format(my_elapsed, fft_elapsed, similar_result))
+    # start = time.time()
+    # my_result = my_dct_2d(matrix)
+    # end = time.time()
+    # my_elapsed = round(end - start, 4)
+    # start = time.time()
+    # fft_result = fft_dct_2d(matrix)
+    # end = time.time()
+    # fft_elapsed = round(end - start, 4)
+    #
+    # similar_result = np.allclose(my_result, fft_result)
+    # print("MyDCT elapsed: {} sec - FFT_DCT elapsed: {} sec - Results are similar: {}"
+    #       .format(my_elapsed, fft_elapsed, similar_result))
 
-
-    print('ok')
+    print('Fine programma')
 
 
 
