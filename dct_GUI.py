@@ -1,10 +1,12 @@
 from tkinter import messagebox, filedialog
+from tkinter import ttk
 from tkinter import *
 import cv2
 from fft import *
 from scipy.misc import imsave
 import matplotlib.pyplot as plt
 import os
+import sys
 
 
 def show_message():
@@ -51,10 +53,19 @@ def callback():
     if d < 0 or d > (rows + cols - 2):
         show_message()
     else:
+        mpb["value"] = 25
+        root.update()
         c = fft_dct_2d(f)
+        mpb["value"] = 50
+        root.update()
         ff = beta_mult(d, beta, c)
+        mpb["value"] = 75
+        root.update()
         ff = fix_values(ff)
+        mpb["value"] = 95
+        root.update()
         imsave('final.jpg', ff)
+        mpb["value"] = 100
 
         plt.figure(1)
         plt.subplot(121)
@@ -105,10 +116,17 @@ Browse_button = Button(root, text="Browse", width=20, command=browse)
 Browse_button.grid(row=1, column=4)
 
 
+mpb = ttk.Progressbar(root,orient ="horizontal",length = 300, mode ="determinate")
+# mpb.pack()
+mpb["maximum"] = 100
+mpb.grid(row=6, column=1)
+
+
+
 root.title("DCT")
 
 root.grid_columnconfigure(4, minsize=200)
-root.grid_rowconfigure(5, minsize=50)
+root.grid_rowconfigure(6, minsize=50)
 
 
 # root.configure(background='pink')

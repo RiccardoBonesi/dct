@@ -6,16 +6,16 @@ from fft import *
 
 def estimate_time(matrix_list):
     for m in matrix_list:
-        start = time.time()
+        start_time = time.time()
         my_dct_2d(m)
-        end = time.time()
-        my_elapsed = round(end - start, 4)
-        start = time.time()
+        end_time = time.time()
+        elapsed_dct = round(end_time - start_time, 4)
+        start_time = time.time()
         fft_dct_2d(m)
-        end = time.time()
-        fft_elapsed = round(end - start, 4)
+        end_time = time.time()
+        elapsed_fft = round(end_time - start_time, 4)
 
-        print("MyDCT elapsed: {} sec - FFT_DCT elapsed: {} sec".format(my_elapsed, fft_elapsed))
+        print("MyDCT elapsed: {} sec - FFT_DCT elapsed: {} sec".format(elapsed_dct, elapsed_fft))
 
 
 def test_square_matrix():
@@ -59,9 +59,9 @@ def test_dct():
 
 if __name__ == "__main__":
 
-    test_square_matrix()
+    # test_square_matrix()
 
-    test_dct()
+    # test_dct()
 
     img = cv2.imread('artificial.bmp', 0)
 
@@ -70,22 +70,24 @@ if __name__ == "__main__":
 
     print('Image loaded. Starting...')
 
-    estimate_time(matrix)       # compare my_dct and fft time for the image (matrix)
+    start = time.time()
+    print('Starting MyDCT...')
+    my_result = my_dct_2d(matrix)
+    end = time.time()
+    my_elapsed = round(end - start, 4)
+    print('MyDCT finished. Time Elapsed = {}'.format(my_elapsed))
+    print('Starting FFT...')
+    start = time.time()
+    fft_result = fft_dct_2d(matrix)
+    end = time.time()
+    fft_elapsed = round(end - start, 4)
+    print('FFT finished. Time Elapsed = {}'.format(my_elapsed))
 
-    # start = time.time()
-    # my_result = my_dct_2d(matrix)
-    # end = time.time()
-    # my_elapsed = round(end - start, 4)
-    # start = time.time()
-    # fft_result = fft_dct_2d(matrix)
-    # end = time.time()
-    # fft_elapsed = round(end - start, 4)
-    #
-    # similar_result = np.allclose(my_result, fft_result)
-    # print("MyDCT elapsed: {} sec - FFT_DCT elapsed: {} sec - Results are similar: {}"
-    #       .format(my_elapsed, fft_elapsed, similar_result))
+    similar_result = np.allclose(my_result, fft_result)
+    print("MyDCT elapsed: {} sec - FFT_DCT elapsed: {} sec - Results are similar: {}"
+          .format(my_elapsed, fft_elapsed, similar_result))
 
-    print('Fine programma')
+    print('FINE')
 
 
 
