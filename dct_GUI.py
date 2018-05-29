@@ -6,9 +6,9 @@ from fft import *
 from scipy.misc import imsave
 import matplotlib.pyplot as plt
 import os
-import sys
 
 
+# messaggio di errore per il valore 'd'
 def show_message():
     messagebox.showinfo("Error", "Value 'd' should be from 0 to N+M-2")
 
@@ -81,6 +81,7 @@ def callback():
         plt.show()
 
 
+# apre il file picker per scegliere l'immagine
 def browse():
     filename = filedialog.askopenfilename(initialdir=os.getcwd(), title="Select BMP File", filetypes=[("BMP Files", "*.bmp")])
     Path_entry.insert(END, filename)
@@ -120,94 +121,14 @@ Browse_button = Button(root, text="Browse", width=20, command=browse)
 Browse_button.grid(row=1, column=4)
 
 
+# PROGRESS BAR
 mpb = ttk.Progressbar(root,orient ="horizontal",length = 300, mode ="determinate")
-# mpb.pack()
 mpb["maximum"] = 100
 mpb.grid(row=6, column=1)
-
-
 
 root.title("DCT")
 
 root.grid_columnconfigure(4, minsize=200)
 root.grid_rowconfigure(6, minsize=50)
 
-
-# root.configure(background='pink')
-
-
 root.mainloop()
-
-
-
-# from tkinter import *
-#
-# window = Tk()
-# User_input = Entry()
-# User_input.pack()
-#
-#
-# window.mainloop()
-#
-# user_problem = int(User_input.get())
-#
-# print('aaa')
-
-# root = Tk()
-#
-# mypattern = [('BMP', '*.bmp')]
-#
-#
-# class Application(Frame):
-#
-#     def say_hi(self):
-#         print("hi there, everyone!")
-#
-#     # def myfileOpen(self):
-#     #     self.myfile = Tk.filedialog.askopenfile(filetypes='*.bmp',
-#     #                                             title='Open a Python file', mode='r')
-#     #     loadedfile = self.myfile.read()
-#     #     self.myfile.close()
-#     #     self.textView.insert("end", loadedfile)
-#
-#
-#     # def retrieve_input():
-#     #     input = self.myText_Box.get("1.0", END)
-#
-#     def createWidgets(self):
-#         self.QUIT = Button(self)
-#         self.QUIT["text"] = "QUIT"
-#         self.QUIT["fg"] = "red"
-#         self.QUIT["command"] = self.quit
-#
-#         self.QUIT.pack({"side": "left"})
-#
-#         self.hi_there = Button(self)
-#         self.hi_there["text"] = "Hello",
-#         self.hi_there["command"] = self.say_hi
-#
-#         self.hi_there.pack({"side": "left"})
-#
-#         self.myfile = Tk.filedialog.askopenfile(filetypes=mypattern, title='Open a Python file', mode='r')
-#         loadedfile = self.myfile.read()
-#         self.myfile.close()
-#         self.textView.insert("end", loadedfile)
-#
-#
-#
-#
-#     def __init__(self, master=None):
-#         Frame.__init__(self, master)
-#         self.pack()
-#         self.createWidgets()
-#
-#
-#
-#
-#
-#
-# #root = Tk()
-#
-# app = Application(master=root)
-# app.mainloop()
-# root.destroy()

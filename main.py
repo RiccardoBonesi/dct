@@ -4,6 +4,7 @@ from my_dct import *
 from fft import *
 
 
+# confronta tempi di esecuzione MyDCT-FFT
 def estimate_time(matrix_list):
     for m in matrix_list:
         start_time = time.time()
@@ -18,6 +19,7 @@ def estimate_time(matrix_list):
         print("MyDCT elapsed: {} sec - FFT_DCT elapsed: {} sec".format(elapsed_dct, elapsed_fft))
 
 
+# crea matrici quadrati per confronto in estimate_time()
 def test_square_matrix():
     matrix_list = [np.random.random((50, 50)),
                    np.random.random((100, 100)),
@@ -37,6 +39,7 @@ def test_square_matrix():
     estimate_time(matrix_list)
 
 
+# testa la mydct e la fft su casi di test del prof
 def test_dct():
     array = np.array([231, 32, 233, 161, 24, 71, 140, 245])
 
