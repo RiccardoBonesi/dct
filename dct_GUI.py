@@ -68,12 +68,15 @@ def callback():
         mpb["value"] = 100
 
         plt.figure(1)
+        # plt.subplot(121)
         plt.subplot(121)
-        plt.imshow(img, cmap='gray', vmin=0, vmax=255)
+        # plt.imshow(f, cmap='gray', vmin=0, vmax=255)
+        plt.imshow(f, cmap=plt.get_cmap('gray'), vmin=0, vmax=255)
 
-        final = cv2.imread('final.jpg', 0)
-        plt.subplot(122)
-        plt.imshow(final, cmap='gray', vmin=0, vmax=255)
+        # final = cv2.imread('final.jpg', 0)
+        plt.subplot(122) # 122
+        # plt.imshow(ff, cmap='gray', vmin=0, vmax=255)
+        plt.imshow(ff, cmap=plt.get_cmap('gray'), vmin=0, vmax=255)
 
         plt.show()
 
@@ -84,6 +87,7 @@ def browse():
 
 
 root = Tk()
+
 
 label_transparent = Label(root, text='')
 label_transparent.grid(row=0, column=0)
