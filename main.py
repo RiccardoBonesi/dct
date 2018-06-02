@@ -19,7 +19,7 @@ def estimate_time(matrix_list):
         print("MyDCT elapsed: {} sec - FFT_DCT elapsed: {} sec".format(elapsed_dct, elapsed_fft))
 
 
-# crea matrici quadrati per confronto in estimate_time()
+# crea matrici quadrate per confronto in estimate_time()
 def test_square_matrix():
     matrix_list = [np.random.random((50, 50)),
                    np.random.random((100, 100)),

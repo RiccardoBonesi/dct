@@ -45,7 +45,7 @@ def beta_mult(d, beta, c):
 def callback():
     img_path = Path_entry.get()
     d = int(D_entry.get())
-    beta = int(beta_entry.get())
+    beta = float(beta_entry.get())
     img = cv2.imread(img_path, 0)
     f = np.array(img, dtype='float64')
     cols = f.shape[0]
